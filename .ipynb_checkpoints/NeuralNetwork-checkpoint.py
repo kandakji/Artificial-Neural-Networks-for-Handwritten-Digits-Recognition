@@ -92,7 +92,7 @@ class NeuralNetwork(object):
         xes = []
         inputs  = data[0]
         targets = data[1]
-        best_val_acc = 100*self.predict(validation_data)/len(validation_data[0])
+        best_val_acc = 100*self.predict_xe(validation_data)/len(validation_data[0])
         best_i2h_W = self.W_input_to_hidden
         best_h2o_W = self.W_hidden_to_output
         for it in range(iterations):
@@ -101,8 +101,8 @@ class NeuralNetwork(object):
             xe = targets*np.log(self.o_output)*(-1)
             error = targets - self.o_output
             error *= error
-            training_accuracies.append(100*self.predict(data)/len(data[0]))
-            validation_accuracies.append(100*self.predict(validation_data)/len(validation_data[0]))
+            training_accuracies.append(100*self.predict_xe(data)/len(data[0]))
+            validation_accuracies.append(100*self.predict_xe(validation_data)/len(validation_data[0]))
             if validation_accuracies[-1] > best_val_acc:
                 best_i2h_W = self.W_input_to_hidden
                 best_h2o_W = self.W_hidden_to_output
